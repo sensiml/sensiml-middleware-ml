@@ -9,6 +9,7 @@ int td_index = 0;
 
 #define SML_MODEL_INDEX 0
 
+static char str_buffer[512];
 static int last_model_result;
 static int last_class_result;
 static int last_segment_length;
@@ -40,6 +41,8 @@ void sml_output_results(int model, int classification)
     last_class_result = classification;
     sml_get_segment_length(model, &last_segment_length);
     sml_get_feature_bank_number(model, &last_feature_bank_number);
+    kb_print_model_result(model, classification, str_buffer, 0);
+    printf("%s\r\n", str_buffer);
 }
 
 int sml_recognition_run(signed short *data, int num_sensors)
