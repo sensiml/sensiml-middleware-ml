@@ -1,7 +1,7 @@
 #include "kb.h"
 #include "kb_typedefs.h"
 #include "kb_debug.h"
-#include "sml_recognition_run.h"
+#include "sensiml_recognition.h"
 #ifdef SML_USE_TEST_DATA
 #include "testdata.h"
 int td_index = 0;
@@ -41,7 +41,7 @@ void sml_output_results(int model, int classification)
     last_class_result = classification;
     sml_get_segment_length(model, &last_segment_length);
     sml_get_feature_bank_number(model, &last_feature_bank_number);
-    kb_print_model_result(model, classification, str_buffer, 0);
+    kb_print_model_result(model, classification, str_buffer, 0, NULL);
     printf("%s\r\n", str_buffer);
 }
 
