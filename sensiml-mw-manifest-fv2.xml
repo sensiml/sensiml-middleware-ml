@@ -1,0 +1,17 @@
+<middleware>
+  <middleware>
+    <name>sensiml-middlewarei-ml</name>
+    <id>sensiml-middleware-ml</id>
+    <uri>https://github.com/sensiml/sensiml-middleware-ml</uri>
+    <desc>This SDK is used to run SensiML Machine Learning Models on Infineon Devieces.</desc>
+    <category>Middleware</category>
+    <req_capabilities></req_capabilities>
+    <versions>
+      <version flow_version="1.0,2.0">
+        <num>1.0.0 release</num>
+        <commit>release-v1.0.0</commit>
+        <desc>release-v1.0.0</desc>
+      </version>
+    </versions>
+  </middleware>
+</middleware>
