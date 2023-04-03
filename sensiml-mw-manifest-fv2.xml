@@ -3,7 +3,7 @@
     <name>sensiml-middlewarei-ml</name>
     <id>sensiml-middleware-ml</id>
     <uri>https://github.com/sensiml/sensiml-middleware-ml</uri>
-    <desc>This SDK is used to run SensiML Machine Learning Models on Infineon Devieces.</desc>
+    <desc>This SDK Middleware is used to load and run SensiML Machine Learning Models on Infineon Devices.</desc>
     <category>Middleware</category>
     <req_capabilities></req_capabilities>
     <versions>
