@@ -8,9 +8,9 @@ The sensiml ml infereence sdk is the wrapper code for running the libsensiml.a l
 
 SensiML provides the following API methods for running the SensiML inference engine deployed machine learning models:
 
-2. init: Initializes the SensiML Machine Learning models so they are ready to run
+2. sensiml_init: Initializes the SensiML Machine Learning models so they are ready to run
 
-1. sml_recognition: Runs the SensiML Machine learning model and provides either an inference result of 0 which is unknown, or an integer value that corresponds the the models class map to identify the label. If the model needs more data before it can inference, a -1 will be returned. 
+1. sensiml_recognition: Runs the SensiML Machine learning model and provides either an inference result of 0 which is unknown, or an integer value that corresponds the the models class map to identify the label. If the model needs more data before it can inference, a -1 will be returned. 
 
 
 ### Quick Start

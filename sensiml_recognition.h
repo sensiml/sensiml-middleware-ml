@@ -10,7 +10,8 @@ int get_last_result_model();
 int get_last_result_class();
 int get_last_feature_bank_number();
 void sml_output_results(int model, int classification);
-int sml_recognition_run(signed short *data, int num_sensors);
+int sensiml_recognition(signed short *data, int num_sensors);
+void sensiml_init();
 
 #ifdef __cplusplus
 }

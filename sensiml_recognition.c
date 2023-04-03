@@ -45,7 +45,7 @@ void sml_output_results(int model, int classification)
     printf("%s\r\n", str_buffer);
 }
 
-int sml_recognition_run(signed short *data, int num_sensors)
+int sensiml_recognition(signed short *data, int num_sensors)
 {
     int ret = -1;
     int feature_bank_number = 0;
@@ -77,7 +77,7 @@ int sml_recognition_run(signed short *data, int num_sensors)
     return ret;
 }
 
-void init()
+void sensiml_init()
 {
     kb_model_init();
 }
