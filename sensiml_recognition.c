@@ -2,12 +2,6 @@
 #include "kb_typedefs.h"
 #include "kb_debug.h"
 #include "sensiml_recognition.h"
-#ifdef SML_USE_TEST_DATA
-#include "testdata.h"
-int td_index = 0;
-#endif // SML_USE_TEST_DATA
-
-#define SML_MODEL_INDEX 0
 
 static char str_buffer[512];
 static int last_model_result;
@@ -35,45 +29,42 @@ int get_last_result_class()
     return last_class_result;
 }
 
-void sml_output_results(int model, int classification)
+void sml_output_results(int model_index, int classification)
 {
-    last_model_result = model;
+    last_model_result = model_index;
     last_class_result = classification;
-    sml_get_segment_length(model, &last_segment_length);
-    sml_get_feature_bank_number(model, &last_feature_bank_number);
-    kb_print_model_result(model, classification, str_buffer, 0, NULL);
+    sml_get_segment_length(model_index, &last_segment_length);
+    sml_get_feature_bank_number(model_index, &last_feature_bank_number);
+    kb_print_model_result(model_index, classification, str_buffer, 0, NULL);
     printf("%s\r\n", str_buffer);
 }
 
-int sensiml_recognition(signed short *data, int num_sensors)
+int sensiml_recognition(signed short *data, int number_packets, int num_sensors, int model_index)
 {
     int ret = -1;
     int feature_bank_number = 0;
-    sml_get_feature_bank_number(SML_MODEL_INDEX, &feature_bank_number);
+    int compIdx = 0;
+    sml_get_feature_bank_number(model_index, &feature_bank_number);
 
-#ifdef SML_USE_TEST_DATA
-    data = (SENSOR_DATA_T *)&testdata[td_index];
-
-    if (td_index++ > TD_NUMROWS)
+    for (int i = 0; i < number_packets; i++)
     {
-        td_index = 0;
+
+        if (feature_bank_number > 1)
+        {
+            ret = kb_run_model((SENSOR_DATA_T *)data, num_sensors, model_index);
+        }
+        else
+        {
+            ret = kb_run_model_with_cascade_features((SENSOR_DATA_T *)data[compIdx], num_sensors, model_index);
+        }
+
+        if (ret >= 0)
+        {
+            sml_output_results(model_index, ret);
+            kb_reset_model(model_index);
+        };
+        compIdx += num_sensors;
     }
-#endif // SML_USE_TEST_DATA
-
-    if (feature_bank_number > 1)
-    {
-        ret = kb_run_model((SENSOR_DATA_T *)data, num_sensors, SML_MODEL_INDEX);
-    }
-    else
-    {
-        ret = kb_run_model_with_cascade_features((SENSOR_DATA_T *)data, num_sensors, SML_MODEL_INDEX);
-    }
-
-    if (ret >= 0)
-    {
-        sml_output_results(SML_MODEL_INDEX, ret);
-        kb_reset_model(SML_MODEL_INDEX);
-    };
     return ret;
 }
 
