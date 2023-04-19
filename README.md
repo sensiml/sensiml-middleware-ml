@@ -24,4 +24,4 @@ To build a machine learning model using the SensiML Analytics toolkgit go to [ht
 * [SensiML](http://sensiml.com)
 
 ---
-© 2022, Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation.
+© 2023, SensiML Corporation.
