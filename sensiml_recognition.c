@@ -49,13 +49,13 @@ int sensiml_recognition(signed short *data, int number_packets, int num_sensors,
     for (int i = 0; i < number_packets; i++)
     {
 
-        if (feature_bank_number > 1)
+        if (feature_bank_number == 1)
         {
-            ret = kb_run_model((SENSOR_DATA_T *)data, num_sensors, model_index);
+            ret = kb_run_model((SENSOR_DATA_T *)&data[compIdx], num_sensors, model_index);
         }
         else
         {
-            ret = kb_run_model_with_cascade_features((SENSOR_DATA_T *)data[compIdx], num_sensors, model_index);
+            ret = kb_run_model_with_cascade_features((SENSOR_DATA_T *)&data[compIdx], num_sensors, model_index);
         }
 
         if (ret >= 0)
